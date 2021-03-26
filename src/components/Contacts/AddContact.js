@@ -10,7 +10,6 @@ export default function AddContact() {
 
   const [inputValues, setInputValues] = useState({
     name: "",
-    lastName: "",
     number: "",
   });
 
@@ -24,7 +23,6 @@ export default function AddContact() {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-
       dispatch(addUserContact(inputValues));
     },
     [dispatch, inputValues]
@@ -37,32 +35,21 @@ export default function AddContact() {
           <h2 className="row row-cols-md-5 justify-content-center">
             Добавить контакт
           </h2>
-          {/* <Form> */}
           <Form onSubmit={handleSubmit}>
             <Form.Group as={Col} controlId="FirstName">
               <Form.Label>Имя</Form.Label>
               <Form.Control
-                type="name"
+                type="text"
                 placeholder="Имя"
-                name="firstName"
+                name="name"
                 value={inputValues.name}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="SecondName">
-              <Form.Label>Фамилия</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Фамилия"
-                name="secondName"
-                value={inputValues.lastName}
                 onChange={handleChange}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridNumber">
               <Form.Label>Номер</Form.Label>
               <Form.Control
-                type="Number"
+                type="text"
                 placeholder="Введите номер"
                 name="number"
                 value={inputValues.number}
@@ -73,7 +60,6 @@ export default function AddContact() {
               Добавить контакт
             </Button>
           </Form>
-          {/* </Form> */}
         </Col>
       </Row>
     </Container>

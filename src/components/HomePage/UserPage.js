@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUserInfo } from "../../redux/contacts/contactsSelectors";
 import { Jumbotron, Container, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,7 +7,9 @@ import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 
-function UserPage({ user }) {
+export default function UserPage() {
+  const user = useSelector(getUserInfo);
+
   return (
     <Jumbotron fluid>
       <Container>
@@ -36,10 +38,10 @@ function UserPage({ user }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: getUserInfo(state),
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: getUserInfo(state),
+//   };
+// };
 
-export default connect(mapStateToProps, null)(UserPage);
+// export default connect(mapStateToProps, null)(UserPage);

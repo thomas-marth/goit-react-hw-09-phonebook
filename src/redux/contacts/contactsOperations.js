@@ -123,6 +123,7 @@ export {
   getUser,
   logoutUser,
   addUserContact,
+  addContactsError,
   getContacts,
   removeContact,
 };

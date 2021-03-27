@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { addUserContact } from "../../redux/contacts/contactsOperations";
+import { addContactsError } from "../../redux/contacts/contactsOperations";
 
 export default function AddContact() {
   const dispatch = useDispatch();
@@ -23,7 +24,15 @@ export default function AddContact() {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(addUserContact(inputValues));
+      if (inputValues.name && inputValues.number) {
+        dispatch(addUserContact(inputValues));
+      } else {
+        dispatch(
+          addContactsError(
+            "Вы не указали все данные. Пожалуста, введите значения в поле ФИО и Номер, для добавления контакта"
+          )
+        );
+      }
     },
     [dispatch, inputValues]
   );
@@ -37,10 +46,10 @@ export default function AddContact() {
           </h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group as={Col} controlId="FirstName">
-              <Form.Label>Имя</Form.Label>
+              <Form.Label>ФИО</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Имя"
+                placeholder="ФИО"
                 name="name"
                 value={inputValues.name}
                 onChange={handleChange}

@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserMenu from "./UserMenu";
 import routes from "../../routes";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { getStatusLogOn } from "../../redux/status/statusSelectors";
 import PublicMenu from "./PublicMenu";
 
-function Navigation({ logOn, props }) {
+export default function Navigation() {
+  const logOn = useSelector(getStatusLogOn);
+
   return (
     <>
       <Nav
@@ -26,10 +28,3 @@ function Navigation({ logOn, props }) {
     </>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    logOn: getStatusLogOn(state),
-  };
-};
-
-export default connect(mapStateToProps, null)(Navigation);

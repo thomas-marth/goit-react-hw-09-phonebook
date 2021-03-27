@@ -3,11 +3,13 @@ import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import routes from "../../routes";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import { getUserInfo } from "../../redux/contacts/contactsSelectors";
 
-function UserMenu({ user }) {
+export default function UserMenu() {
+  const user = useSelector(getUserInfo);
+
   return (
     <>
       {!user ? (
@@ -39,11 +41,3 @@ function UserMenu({ user }) {
     </>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    user: getUserInfo(state),
-  };
-};
-
-export default connect(mapStateToProps, null)(UserMenu);

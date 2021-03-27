@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeContact } from "../../redux/contacts/contactsOperations";
 
-function ContactListItem({ contact, removeContact }) {
+export default function ContactListItem({ contact }) {
+  const dispatch = useDispatch(removeContact);
   return (
     <Card
       className="col mb-5"
@@ -18,7 +19,7 @@ function ContactListItem({ contact, removeContact }) {
           variant="primary"
           type="button"
           id={contact.id}
-          onClick={(e) => removeContact(e.target.id)}
+          onClick={(e) => dispatch(removeContact(e.target.id))}
         >
           Удалить
         </Button>
@@ -26,9 +27,3 @@ function ContactListItem({ contact, removeContact }) {
     </Card>
   );
 }
-
-const mapDispatchToProps = {
-  removeContact,
-};
-
-export default connect(null, mapDispatchToProps)(ContactListItem);
